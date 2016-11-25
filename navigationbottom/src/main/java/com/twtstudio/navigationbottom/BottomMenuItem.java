@@ -1,4 +1,4 @@
-package com.example.navigationbottom;
+package com.twtstudio.navigationbottom;
 
 /**
  * Created by : youngkaaa on 2016/8/31.

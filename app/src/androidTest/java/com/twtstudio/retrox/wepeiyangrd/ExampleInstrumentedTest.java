@@ -1,4 +1,4 @@
-package com.example.retrox.wepeiyangrd;
+package com.twtstudio.retrox.wepeiyangrd;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

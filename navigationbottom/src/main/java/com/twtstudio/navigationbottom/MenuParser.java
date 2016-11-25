@@ -1,4 +1,4 @@
-package com.example.navigationbottom;
+package com.twtstudio.navigationbottom;
 
 import android.content.Context;
 import android.content.res.TypedArray;

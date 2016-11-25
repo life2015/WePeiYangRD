@@ -1,9 +1,8 @@
-package com.example.retrox.wepeiyangrd;
+package com.twtstudio.retrox.wepeiyangrd;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.kelin.mvvmlight.base.ViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

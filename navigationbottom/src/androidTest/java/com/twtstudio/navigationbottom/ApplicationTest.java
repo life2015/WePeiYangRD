@@ -1,4 +1,4 @@
-package com.example.navigationbottom;
+package com.twtstudio.navigationbottom;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

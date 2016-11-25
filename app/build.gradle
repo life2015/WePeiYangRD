@@ -49,4 +49,7 @@ dependencies {
 
     compile 'com.trello:rxlifecycle:1.0'
     compile 'com.trello:rxlifecycle-components:1.0'
+
+    compile 'commons-codec:commons-codec:1.6'
+
 }
