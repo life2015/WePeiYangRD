@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WePeiYangRD.iml" filepath="$PROJECT_DIR$/WePeiYangRD.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fragmentation/fragmentation.iml" filepath="$PROJECT_DIR$/fragmentation/fragmentation.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvvmKit/mvvmKit.iml" filepath="$PROJECT_DIR$/mvvmKit/mvvmKit.iml" />
       <module fileurl="file://$PROJECT_DIR$/navigationbottom/navigationbottom.iml" filepath="$PROJECT_DIR$/navigationbottom/navigationbottom.iml" />
     </modules>

@@ -1,1 +1,1 @@
-include ':app' , ':mvvmKit' ,':navigationbottom'
+include ':app' , ':mvvmKit' ,':navigationbottom' ,':fragmentation'
