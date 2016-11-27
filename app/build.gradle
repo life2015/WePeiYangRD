@@ -37,7 +37,6 @@ dependencies {
     //module
     compile project(':mvvmKit')
     compile project(':navigationbottom')
-
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
@@ -46,10 +45,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.0.1'
     compile 'com.squareup.okhttp3:okhttp:3.4.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.2'
-
-    compile 'com.trello:rxlifecycle:1.0'
-    compile 'com.trello:rxlifecycle-components:1.0'
-
+//    compile 'com.trello:rxlifecycle:1.0'
+//    compile 'com.trello:rxlifecycle-components:1.0'
     compile 'commons-codec:commons-codec:1.6'
-
+    compile project(':fragmentation')
 }

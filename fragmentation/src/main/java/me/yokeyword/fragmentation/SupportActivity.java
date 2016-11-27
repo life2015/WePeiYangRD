@@ -8,13 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * Created by YoKeyword on 16/1/22.
  */
-public class SupportActivity extends AppCompatActivity implements ISupport {
+public class SupportActivity extends RxAppCompatActivity implements ISupport {
     private Fragmentation mFragmentation;
 
     private FragmentAnimator mFragmentAnimator;

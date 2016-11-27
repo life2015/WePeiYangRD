@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 
+import com.trello.rxlifecycle.components.support.RxFragment;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -28,7 +30,7 @@ import me.yokeyword.fragmentation.helper.TransactionRecord;
 /**
  * Created by YoKeyword on 16/1/22.
  */
-public class SupportFragment extends Fragment implements ISupportFragment {
+public class SupportFragment extends RxFragment implements ISupportFragment {
     // LaunchMode
     public static final int STANDARD = 0;
     public static final int SINGLETOP = 1;
