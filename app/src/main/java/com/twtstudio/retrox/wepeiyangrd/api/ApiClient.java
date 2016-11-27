@@ -64,6 +64,10 @@ public class ApiClient {
         return SingletonHolder.INSTANCE;
     }
 
+    public static Api getService(){
+        return SingletonHolder.INSTANCE.mService;
+    }
+
     protected static Interceptor sRequestInterceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {

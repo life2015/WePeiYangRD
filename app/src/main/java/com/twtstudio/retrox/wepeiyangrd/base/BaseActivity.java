@@ -1,7 +1,5 @@
 package com.twtstudio.retrox.wepeiyangrd.base;
 
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
