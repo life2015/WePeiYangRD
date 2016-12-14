@@ -4,9 +4,9 @@ package com.twtstudio.retrox.wepeiyangrd;
  * Created by sunjuntao on 16/1/7.
  */
 public class JniUtils {
-    static {
-        System.loadLibrary("Jni");
-    }
+//    static {
+//        System.loadLibrary("Jni");
+//    }
 
     public  String getAppKey(){
         return "9GTdynvrCm1EKKFfVmTC";

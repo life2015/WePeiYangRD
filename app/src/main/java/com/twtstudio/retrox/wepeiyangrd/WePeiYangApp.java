@@ -3,6 +3,8 @@ package com.twtstudio.retrox.wepeiyangrd;
 import android.app.Application;
 import android.content.Context;
 
+import com.orhanobut.hawk.Hawk;
+
 /**
  * Created by retrox on 2016/11/25.
  */
@@ -14,6 +16,7 @@ public class WePeiYangApp extends Application {
     public void onCreate() {
         super.onCreate();
         sContext = getApplicationContext();
+        Hawk.init(sContext).build();
     }
 
     public static Context getContext() {

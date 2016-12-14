@@ -59,4 +59,6 @@ dependencies {
 
     //logger
     compile 'com.orhanobut:logger:1.15'
+
+    compile 'com.orhanobut:hawk:2.0.1'
 }

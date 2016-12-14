@@ -11,11 +11,12 @@ import com.twtstudio.retrox.wepeiyangrd.home.news.NewsFragment;
 import com.twtstudio.retrox.wepeiyangrd.home.tools.ToolsFragment;
 import com.twtstudio.retrox.wepeiyangrd.home.user.UserFragment;
 import com.twtstudio.retrox.wepeiyangrd.view.BottomBar;
+import com.twtstudio.retrox.wepeiyangrd.view.BottomBarTab;
 
 /**
  * Created by retrox on 2016/12/12.
  * home activity ui
- *    ONLY UI
+ * ONLY UI
  */
 
 public class HomeActivity extends BaseActivity {
@@ -54,11 +55,34 @@ public class HomeActivity extends BaseActivity {
             mFragments[FOURTH] = findFragment(UserFragment.class);
 
         }
+
+        initView();
     }
 
-    private void initView(){
+    private void initView() {
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
+        //fake icons
+        mBottomBar.addItem(new BottomBarTab(this, R.drawable.ic_mood_black_24dp))
+                .addItem(new BottomBarTab(this, R.drawable.ic_avatar))
+                .addItem(new BottomBarTab(this, R.drawable.ic_avatar))
+                .addItem(new BottomBarTab(this, R.drawable.ic_avatar));
 
+        mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, int prePosition) {
+                showHideFragment(mFragments[position], mFragments[prePosition]);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+
+            }
+        });
     }
 }

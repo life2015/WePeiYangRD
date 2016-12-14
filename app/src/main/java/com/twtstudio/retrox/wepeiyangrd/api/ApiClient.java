@@ -2,6 +2,7 @@ package com.twtstudio.retrox.wepeiyangrd.api;
 
 
 import com.twtstudio.retrox.wepeiyangrd.JniUtils;
+import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
 import com.twtstudio.retrox.wepeiyangrd.support.PrefUtils;
 
 import org.apache.commons.codec.binary.Hex;
@@ -47,7 +48,7 @@ public class ApiClient {
                 .build();
 
         mRetrofit = new Retrofit.Builder()
-                .baseUrl("http://open.twtstudio.com/api/v1/")
+                .baseUrl("https://open.twtstudio.com/api/v1/")
                 .client(client)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -77,7 +78,7 @@ public class ApiClient {
 
             Request.Builder builder = originRequest.newBuilder()
 //                    .addHeader("User-Agent", UserAgent.generate())
-                    .addHeader("Authorization", PrefUtils.getToken())
+                    .addHeader("Authorization", HawkUtil.getToken())
                     .url(newUrl);
 
 
