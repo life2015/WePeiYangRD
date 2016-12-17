@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -29,6 +31,20 @@ public class DiskCache implements ICache {
 
     public static long OTHER_CACHE_TIME = 10 * 60 * 1000;
     public static long WIFI_CACHE_TIME = 30 * 60 * 1000;
+
+    public static final int GPA = 1;
+    public static final int Secdule = 2;
+
+    private static List<String> longTimeDataKey = new ArrayList<>();
+
+    /**
+     * some need long time save
+     */
+    static {
+        longTimeDataKey.add("key1");
+        longTimeDataKey.add("key2");
+    }
+
 
     private File fileDir;
 
@@ -114,11 +130,16 @@ public class DiskCache implements ICache {
         }
         long existTime = System.currentTimeMillis() - dataFile.lastModified();
         boolean isFailure = false;
-        if (NetworkUtils.getNetworkType(WePeiYangApp.getContext()) == NetworkUtils.NetworkType.NETWORK_WIFI) {
-            isFailure = existTime > WIFI_CACHE_TIME;
-        } else {
-            isFailure = existTime > OTHER_CACHE_TIME;
+        if (isLongTimeData(getKey(dataFile))){
+            isFailure = false;
+        }else {
+            if (NetworkUtils.getNetworkType(WePeiYangApp.getContext()) == NetworkUtils.NetworkType.NETWORK_WIFI) {
+                isFailure = existTime > WIFI_CACHE_TIME;
+            } else {
+                isFailure = existTime > OTHER_CACHE_TIME;
+            }
         }
+
         return isFailure;
     }
 
@@ -165,5 +186,15 @@ public class DiskCache implements ICache {
         if (file.exists()){
             file.delete();
         }
+    }
+
+    private String getKey(File file){
+        String name = file.getName();
+        String[] strings = name.split("\\.");
+        return strings[0];
+    }
+
+    private boolean isLongTimeData(String key){
+        return longTimeDataKey.contains(key);
     }
 }

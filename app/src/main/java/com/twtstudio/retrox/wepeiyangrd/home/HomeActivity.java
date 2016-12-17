@@ -63,10 +63,10 @@ public class HomeActivity extends BaseActivity {
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
 
         //fake icons
-        mBottomBar.addItem(new BottomBarTab(this, R.drawable.ic_mood_black_24dp))
-                .addItem(new BottomBarTab(this, R.drawable.ic_avatar))
-                .addItem(new BottomBarTab(this, R.drawable.ic_avatar))
-                .addItem(new BottomBarTab(this, R.drawable.ic_avatar));
+        mBottomBar.addItem(new BottomBarTab(this, R.drawable.ic_common))
+                .addItem(new BottomBarTab(this, R.drawable.ic_news))
+                .addItem(new BottomBarTab(this, R.drawable.ic_tools))
+                .addItem(new BottomBarTab(this, R.drawable.ic_user));
 
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override

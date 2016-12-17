@@ -30,6 +30,10 @@ public class LoginViewModel implements ViewModel {
     public final ObservableField<String> twtpasswd = new ObservableField<>("密码");
     public Token mToken;
 
+    public LoginViewModel(LoginActivity activity) {
+        mActivity = activity;
+    }
+
     //viewStyle
     public final ViewStyle mViewStyle = new ViewStyle();
 
@@ -38,9 +42,7 @@ public class LoginViewModel implements ViewModel {
     }
 
     //command
-    public ReplyCommand onLoginClickCommand = new ReplyCommand(() -> {
-        login();
-    });
+    public ReplyCommand onLoginClickCommand = new ReplyCommand(this::login);
 
     public ReplyCommand onRegisterClickCommand = new ReplyCommand(() -> {
         // TODO: 2016/11/27 跳转到注册页面
@@ -69,5 +71,18 @@ public class LoginViewModel implements ViewModel {
                     HawkUtil.setToken(token.token);
                     HawkUtil.setIsLogin(true);
                 });
+
+        wpyToken.filter(Notification::isOnError)
+                .map(Notification::getValue)
+                .map(ApiResponse::getError_code)
+                .subscribe(integer -> {
+                    switch (integer){
+                        case 400:
+                            // TODO: 2016/12/17 something
+                            break;
+                    }
+                });
     }
+
+
 }

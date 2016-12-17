@@ -1,6 +1,9 @@
 package com.twtstudio.retrox.wepeiyangrd.api;
 
 
+import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 import com.twtstudio.retrox.wepeiyangrd.JniUtils;
 import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
 import com.twtstudio.retrox.wepeiyangrd.support.PrefUtils;
@@ -21,10 +24,13 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.internal.platform.Platform;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static okhttp3.internal.platform.Platform.INFO;
 
 /**
  * Created by retrox on 2016/11/25.
@@ -38,11 +44,21 @@ public class ApiClient {
 
     public ApiClient() {
 
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                if (message.startsWith("{")){
+                    Logger.json(message);
+                }else {
+                    Platform.get().log(INFO, message, null);
+                }
+            }
+        });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addInterceptor(sRequestInterceptor)
                 .retryOnConnectionFailure(false)
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .build();
@@ -81,6 +97,7 @@ public class ApiClient {
                     .addHeader("Authorization", HawkUtil.getToken())
                     .url(newUrl);
 
+            Logger.d("token-->"+HawkUtil.getToken());
 
             return chain.proceed(builder.build());
         }
