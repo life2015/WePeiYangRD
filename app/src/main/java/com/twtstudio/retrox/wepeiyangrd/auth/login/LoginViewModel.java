@@ -62,21 +62,19 @@ public class LoginViewModel implements ViewModel {
         wpyToken.filter(Notification::isOnNext)
                 .map(Notification::getValue)
                 .map(ApiResponse::getData)
-                .doAfterTerminate(() -> {
-                    Toast.makeText(mActivity, "登陆成功", Toast.LENGTH_SHORT).show();
-                    mViewStyle.isProgressRefreshing.set(false);
-                    // TODO: 2016/11/27 jump to home page
-                })
+                .doAfterTerminate(() -> mViewStyle.isProgressRefreshing.set(false))
                 .subscribe(token -> {
                     HawkUtil.setToken(token.token);
                     HawkUtil.setIsLogin(true);
+                    Toast.makeText(mActivity, "登陆成功", Toast.LENGTH_SHORT).show();
+                    // TODO: 2016/11/27 jump to home page
                 });
 
         wpyToken.filter(Notification::isOnError)
                 .map(Notification::getValue)
                 .map(ApiResponse::getError_code)
                 .subscribe(integer -> {
-                    switch (integer){
+                    switch (integer) {
                         case 400:
                             // TODO: 2016/12/17 something
                             break;

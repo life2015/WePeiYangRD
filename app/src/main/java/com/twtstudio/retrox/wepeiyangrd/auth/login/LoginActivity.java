@@ -17,9 +17,9 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LoginViewModel viewModel = new LoginViewModel(this);
-        viewModel.twtuName.set("miss976885345");
-        viewModel.twtpasswd.set("JCYwin551100");
-        viewModel.onLoginClickCommand.execute();
+//        LoginViewModel viewModel = new LoginViewModel(this);
+//        viewModel.twtuName.set("miss976885345");
+//        viewModel.twtpasswd.set("JCYwin551100");
+//        viewModel.onLoginClickCommand.execute();
     }
 }
