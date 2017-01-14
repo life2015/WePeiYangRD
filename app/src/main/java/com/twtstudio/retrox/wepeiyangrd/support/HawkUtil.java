@@ -20,6 +20,8 @@ public class HawkUtil {
     private static final String BIKE_CARD_SIGN = "bike_sign";
     private static final String BIKE_CARD_ID = "bike_id";
 
+    private static final String THEME_MODE = "theme"; //false is normal , true is night
+
     public static void clearAll(){
         Hawk.deleteAll();
     }
@@ -40,5 +42,13 @@ public class HawkUtil {
 
     public static boolean getIsLogin(){
         return Hawk.get(IS_LOGIN,false);
+    }
+
+    public static void setThemeMode(boolean themeMode){
+        Hawk.put(THEME_MODE,themeMode);
+    }
+
+    public static boolean getThemeMode(){
+        return Hawk.get(THEME_MODE,false);
     }
 }
