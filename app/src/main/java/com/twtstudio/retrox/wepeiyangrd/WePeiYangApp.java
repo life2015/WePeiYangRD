@@ -3,6 +3,7 @@ package com.twtstudio.retrox.wepeiyangrd;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.hawk.Hawk;
 
 /**
@@ -17,6 +18,7 @@ public class WePeiYangApp extends Application {
         super.onCreate();
         sContext = getApplicationContext();
         Hawk.init(sContext).build();
+        Fresco.initialize(sContext);
     }
 
     public static Context getContext() {

@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.twtstudio.retrox.wepeiyangrd.auth.login.LoginViewModel;
+import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

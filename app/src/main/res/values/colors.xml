@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="tab_unselect">#c9c9c9</color>
+    <color name="background_gray">#eeeeee</color>
 </resources>

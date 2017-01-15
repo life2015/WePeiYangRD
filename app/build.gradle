@@ -42,7 +42,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //module
     compile project(':mvvmKit')
-    compile project(':navigationbottom')
+//    compile project(':navigationbottom')
     compile project(':fragmentation')
 
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:src="@{viewModel.imageRes}"
+            bind:placeholderImageRes="@{viewModel.imageRes}"
             />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="5dp"
             android:gravity="center_vertical"
-            android:text="@{viewModel.num}"/>
+            android:text="@{String.valueOf(viewModel.num)}"/>
 
 
     </RelativeLayout>

@@ -34,8 +34,8 @@ public class CommonItemViewModel implements ViewModel {
 
     public ViewStyle viewStyle = new ViewStyle();
 
-    private static class ViewStyle {
-        ObservableInt textColor = new ObservableInt(0);
+    public class ViewStyle {
+        public final ObservableInt textColor = new ObservableInt(0);
     }
 
     public CommonItemViewModel(Context context, int commandId) {

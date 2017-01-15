@@ -11,14 +11,15 @@
         android:supportsRtl="true"
         android:name=".WePeiYangApp"
         android:theme="@style/AppTheme">
-        <activity android:name="com.twtstudio.retrox.wepeiyangrd.MainActivity">
+        <activity android:name="com.twtstudio.retrox.wepeiyangrd.MainActivity"/>
+
+        <activity android:name=".home.HomeActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".home.HomeActivity" android:exported="true"/>
         <activity android:name=".auth.login.LoginActivity" android:exported="true"/>
     </application>
 

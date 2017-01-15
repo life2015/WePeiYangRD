@@ -8,6 +8,7 @@ import android.databinding.ObservableInt;
 
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
+import com.orhanobut.logger.Logger;
 import com.twtstudio.retrox.wepeiyangrd.BR;
 import com.twtstudio.retrox.wepeiyangrd.R;
 import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
@@ -35,8 +36,8 @@ public class PrefItemViewModel implements ViewModel {
 
     public ViewStyle viewStyle = new ViewStyle();
 
-    private static class ViewStyle{
-        public ObservableBoolean switchable = new ObservableBoolean(false);
+    public class ViewStyle{
+       public final ObservableBoolean switchable = new ObservableBoolean(false);
     }
 
     public ReplyCommand clickCommand = new ReplyCommand(this::onClick);
@@ -53,7 +54,7 @@ public class PrefItemViewModel implements ViewModel {
         int mode = mMode;
         if (mode == NIGHTMODE){
             imageRes.set(R.mipmap.ic_launcher);
-            title.set("设置");
+            title.set("NIGHTMODE");
 
             viewStyle.switchable.set(true);
             preference.set(HawkUtil.getThemeMode());
@@ -76,7 +77,7 @@ public class PrefItemViewModel implements ViewModel {
     }
 
     private void onClick(){
-
+        Logger.d("pref click");
     }
 
 }

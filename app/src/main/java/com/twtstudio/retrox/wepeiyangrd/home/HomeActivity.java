@@ -36,7 +36,7 @@ public class HomeActivity extends BaseActivity {
 
         setContentView(R.layout.activity_home);
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
             mFragments[FIRST] = CommonFragment.newInstance();
             mFragments[SECOND] = NewsFragment.newInstance();
             mFragments[THIRD] = ToolsFragment.newInstance();
