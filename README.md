@@ -16,7 +16,7 @@ WePeiYang Redesign
 
 > Library：[MvvmLight框架地址](https://github.com/Kelin-Hong/MVVMLight)
 >
-> 中文文档：**[**MVVM Light Toolkit使用指南**](http://www.jianshu.com/p/43ea7a531700)
+> 中文文档：[**MVVM Light Toolkit使用指南**](http://www.jianshu.com/p/43ea7a531700)
 >
 > **引申阅读：**[**如何构建Android MVVM应用程序**](http://www.jianshu.com/p/2fc41a310f79)
 
@@ -58,7 +58,7 @@ WePeiYang Redesign
    }
    ```
 
-   ​
+   > Item 所绑定的layout代码：
 
    ```Xml
    <layout xmlns:android="http://schemas.android.com/apk/res/android"
