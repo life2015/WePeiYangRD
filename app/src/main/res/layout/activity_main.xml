@@ -19,14 +19,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"/>
 
-    <Switch
+    <Button
+        android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/test_text"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="93dp"
-        android:checked="true"
-        android:id="@+id/switch1"/>
+        android:layout_marginTop="16dp"
+        android:id="@+id/button"/>
+
 
 </RelativeLayout>

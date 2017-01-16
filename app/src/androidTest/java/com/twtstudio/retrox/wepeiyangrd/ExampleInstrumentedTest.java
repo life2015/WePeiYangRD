@@ -29,9 +29,9 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.retrox.wepeiyangrd", appContext.getPackageName());
 
-//        ApiClient.getService().login("miss976885345","JCYwin551100")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(tokenApiResponse -> Logger.d(tokenApiResponse.getData()));
+        ApiClient.getService().login("miss976885345","JCYwin551100")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(tokenApiResponse -> Logger.d(tokenApiResponse.getData()));
     }
 }

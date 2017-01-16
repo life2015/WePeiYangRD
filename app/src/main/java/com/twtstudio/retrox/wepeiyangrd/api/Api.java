@@ -1,6 +1,7 @@
 package com.twtstudio.retrox.wepeiyangrd.api;
 
 import com.twtstudio.retrox.wepeiyangrd.auth.login.Token;
+import com.twtstudio.retrox.wepeiyangrd.home.common.oneItem.OneInfoBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -22,5 +23,6 @@ public interface Api {
     Observable<ApiResponse<Token>> login(@Query("twtuname") String twtuname, @Query("twtpasswd") String twtpasswd);
 
 
-
+    @GET("http://rest.wufazhuce.com/OneForWeb/one/getHpinfo")
+    Observable<OneInfoBean> getOneHpInfo(@Query("strDate") String date);
 }

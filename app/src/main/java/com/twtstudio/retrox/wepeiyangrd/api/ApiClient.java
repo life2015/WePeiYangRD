@@ -90,6 +90,12 @@ public class ApiClient {
         public Response intercept(Chain chain) throws IOException {
             Request originRequest = chain.request();
 
+            /**
+             * deal with other requests (not twt requests)
+             */
+            if (originRequest.url().host().equals("open.twtstudio.com")){
+                return chain.proceed(originRequest);
+            }
             HttpUrl newUrl = convert(originRequest.url());
 
             Request.Builder builder = originRequest.newBuilder()

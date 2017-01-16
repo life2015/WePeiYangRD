@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:name=".WePeiYangApp"
         android:theme="@style/AppTheme">
-        <activity android:name="com.twtstudio.retrox.wepeiyangrd.MainActivity"/>
+        <activity android:name="com.twtstudio.retrox.wepeiyangrd.MainActivity" android:exported="true"/>
 
         <activity android:name=".home.HomeActivity" android:exported="true">
             <intent-filter>

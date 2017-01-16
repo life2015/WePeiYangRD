@@ -186,4 +186,71 @@ WePeiYang Redesign
            bind:clickCommand="@{viewModel.clickCommand}">
    ```
 
+4. ViewModel层的数据获取设计（Rx）
+
+   > 使用Rxjava处理复杂逻辑
+
+   ```java
+   public class OneInfoViewModel implements ViewModel {
+
+       /**
+        * 用于绑定fragment的生命周期，还有context的提供
+        */
+       private BaseFragment mFragment;
+
+       /**
+        * fields 与UI绑定的可变数据源
+        */
+       public final ObservableField<String> imageUrl = new ObservableField<>();
+
+       public final ObservableField<String> content = new ObservableField<>();
+
+       public final ObservableField<String> author = new ObservableField<>();
+
+       public static final SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+
+       public OneInfoViewModel(BaseFragment fragment) {
+           mFragment = fragment;
+           getData();
+       }
+
+       /**
+        * Rx 风格的数据请求
+        */
+       private void getData() {
+           Observable<Notification<OneInfoBean>> oneInfoOb =
+                   Observable.just(Calendar.getInstance())
+                           .subscribeOn(Schedulers.io())
+                           .map(Calendar::getTime)
+                           .map(dateFormate::format)
+                           .flatMap(s -> ApiClient.getService().getOneHpInfo(s))
+                           .compose(mFragment.bindToLifecycle())
+                           .materialize().share();
+
+           oneInfoOb.filter(Notification::isOnNext)
+                   .map(Notification::getValue)
+                   .map(oneInfoBean -> oneInfoBean.hpEntity)
+                   .doOnNext(hpEntityBean -> {
+                       imageUrl.set(hpEntityBean.strOriginalImgUrl);
+                       content.set(hpEntityBean.strContent);
+                       author.set(hpEntityBean.strAuthor);
+                   })
+                   .subscribe();
+
+       }
+   }
+
+   ```
+
+5. ViewModel层的单独测试，viewmodel对view是解耦的，所以可以单独测试viewmodel的功能模块
+
+   > Sample : ViewModel Rxjava Network Request Test —— >_<
+
+   ```java
+   private void test1(){
+           BaseFragment fragment = new BaseFragment();
+           OneInfoViewModel viewModel = new OneInfoViewModel(fragment);
+       }
+   ```
+
    ​
