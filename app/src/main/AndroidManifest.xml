@@ -20,7 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auth.login.LoginActivity" android:exported="true"/>
+        <activity android:name=".auth.login.LoginActivity"
+                  android:exported="true"
+                  android:theme="@style/LoginTheme"/>
+
     </application>
 
 </manifest>
