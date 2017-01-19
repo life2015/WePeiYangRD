@@ -3,6 +3,7 @@ package com.kelin.mvvmlight.bindingadapter.view;
 import android.databinding.BindingAdapter;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.kelin.mvvmlight.command.ReplyCommand;
 import com.kelin.mvvmlight.command.ResponseCommand;

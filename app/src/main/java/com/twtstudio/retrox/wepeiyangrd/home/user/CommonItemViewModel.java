@@ -46,13 +46,13 @@ public class CommonItemViewModel implements ViewModel {
 
     private void init(){
         if (commandId == MESSAGE){
-            imageRes.set(R.mipmap.ic_launcher);
+            imageRes.set(R.drawable.ic_message);
             title.set("我的消息");
         }else if (commandId == COLLECTION){
-            imageRes.set(R.mipmap.ic_launcher);
+            imageRes.set(R.drawable.ic_collection);
             title.set("我的收藏");
         }else if (commandId == RECORD){
-            imageRes.set(R.mipmap.ic_launcher);
+            imageRes.set(R.drawable.ic_browsing_history);
             title.set("历史记录");
         }
         excuteNetWorkData();

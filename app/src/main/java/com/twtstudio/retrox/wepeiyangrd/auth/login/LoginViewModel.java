@@ -8,6 +8,7 @@ import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
 import com.twtstudio.retrox.wepeiyangrd.api.ApiClient;
 import com.twtstudio.retrox.wepeiyangrd.api.ApiResponse;
+import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
 import com.twtstudio.retrox.wepeiyangrd.support.PrefUtils;
 
@@ -23,14 +24,14 @@ import rx.schedulers.Schedulers;
 public class LoginViewModel implements ViewModel {
 
     //context
-    private LoginActivity mActivity;
+    private BaseActivity mActivity;
 
     //model
     public final ObservableField<String> twtuName = new ObservableField<>("用户名");
     public final ObservableField<String> twtpasswd = new ObservableField<>("密码");
     public Token mToken;
 
-    public LoginViewModel(LoginActivity activity) {
+    public LoginViewModel(BaseActivity activity) {
         mActivity = activity;
     }
 

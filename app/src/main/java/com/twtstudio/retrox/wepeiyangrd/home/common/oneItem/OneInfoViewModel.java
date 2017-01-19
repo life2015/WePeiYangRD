@@ -1,5 +1,6 @@
 package com.twtstudio.retrox.wepeiyangrd.home.common.oneItem;
 
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 
@@ -37,6 +38,13 @@ public class OneInfoViewModel implements ViewModel {
     public final ObservableField<String> author = new ObservableField<>();
 
     public static final SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+
+    /**
+     * 这里暂时没啥乱用
+     */
+    public class ViewStyle{
+        public final ObservableBoolean progressRefreshing = new ObservableBoolean(true);
+    }
 
     public OneInfoViewModel(BaseFragment fragment) {
         mFragment = fragment;

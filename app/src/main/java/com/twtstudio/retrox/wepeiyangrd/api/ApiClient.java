@@ -44,16 +44,14 @@ public class ApiClient {
 
     public ApiClient() {
 
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                if (message.startsWith("{")){
-                    Logger.json(message);
-                }else {
-                    Platform.get().log(INFO, message, null);
-                }
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> {
+            if (message.startsWith("{")){
+                Logger.json(message);
+            }else {
+                Platform.get().log(INFO, message, null);
             }
         });
+
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient client = new OkHttpClient.Builder()
@@ -93,14 +91,15 @@ public class ApiClient {
             /**
              * deal with other requests (not twt requests)
              */
-            if (originRequest.url().host().equals("open.twtstudio.com")){
+            if (!originRequest.url().host().equals("open.twtstudio.com")){
                 return chain.proceed(originRequest);
             }
+
             HttpUrl newUrl = convert(originRequest.url());
 
             Request.Builder builder = originRequest.newBuilder()
 //                    .addHeader("User-Agent", UserAgent.generate())
-                    .addHeader("Authorization", HawkUtil.getToken())
+                    .addHeader("Authorization", "Bearer{"+HawkUtil.getToken()+"}")
                     .url(newUrl);
 
             Logger.d("token-->"+HawkUtil.getToken());
