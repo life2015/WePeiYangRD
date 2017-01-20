@@ -25,6 +25,7 @@ public class GpaViewModel implements ViewModel {
                 .subscribeOn(Schedulers.io())
                 .map(ApiResponse::getData)
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(mActivity.bindToLifecycle())
                 .subscribe(gpaBean -> {
                     Logger.d(gpaBean);
                 },Throwable::printStackTrace);

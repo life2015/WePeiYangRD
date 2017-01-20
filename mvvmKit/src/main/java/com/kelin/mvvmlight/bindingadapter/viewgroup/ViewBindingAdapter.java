@@ -6,6 +6,7 @@ import android.databinding.ObservableList;
 import android.databinding.ViewDataBinding;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.kelin.mvvmlight.base.ViewModel;
 

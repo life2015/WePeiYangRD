@@ -18,7 +18,7 @@ import me.tatarka.bindingcollectionadapter.ItemView;
 public class ToolsFragViewModel implements ViewModel {
     private Context mContext;
 
-    public final ObservableArrayList<ToolItemViewModel> itemList = new ObservableArrayList<>();
+    public final ObservableArrayList<ViewModel> itemList = new ObservableArrayList<>();
 
     public final ItemView itemView = ItemView.of(BR.viewModel, R.layout.item_tool);
 
