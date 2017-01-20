@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.twtstudio.retrox.wepeiyangrd">
+          package="com.twtstudio.retrox.wepeiyangrd">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".WePeiYangApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".WePeiYangApp"
         android:theme="@style/AppTheme">
-        <activity android:name="com.twtstudio.retrox.wepeiyangrd.MainActivity" android:exported="true"/>
+        <activity
+            android:name="com.twtstudio.retrox.wepeiyangrd.MainActivity"
+            android:exported="true"/>
 
-        <activity android:name=".home.HomeActivity" android:exported="true">
+        <activity
+            android:name=".home.HomeActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".auth.login.LoginActivity"
+            android:exported="true"
+            android:theme="@style/LoginTheme"/>
+
+        <activity
+            android:name=".module.welcome.WelcomeActivity"
+            android:exported="true"
+            android:theme="@style/Splash">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".auth.login.LoginActivity"
-                  android:exported="true"
-                  android:theme="@style/LoginTheme"/>
-
     </application>
 
 </manifest>

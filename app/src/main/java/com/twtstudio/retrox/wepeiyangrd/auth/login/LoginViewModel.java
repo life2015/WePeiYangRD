@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
 import com.twtstudio.retrox.wepeiyangrd.api.ApiClient;
+import com.twtstudio.retrox.wepeiyangrd.api.ApiErrorHandler;
 import com.twtstudio.retrox.wepeiyangrd.api.ApiResponse;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 import com.twtstudio.retrox.wepeiyangrd.home.HomeActivity;
@@ -40,7 +41,7 @@ public class LoginViewModel implements ViewModel {
     //viewStyle
     public final ViewStyle mViewStyle = new ViewStyle();
 
-    private static class ViewStyle {
+    public class ViewStyle {
         public final ObservableBoolean isProgressRefreshing = new ObservableBoolean(false);
     }
 
@@ -83,19 +84,15 @@ public class LoginViewModel implements ViewModel {
                     mActivity.startActivity(intent);
                 });
 
-//        wpyToken.filter(Notification::isOnError)
-//                .map(Notification::getValue)
-//                .map(ApiResponse::getError_code)
-//                .subscribe(integer -> {
-//                    switch (integer) {
-//                        case 400:
-//                            // TODO: 2016/12/17 something
-//                            break;
-//                    }
-//                });
+        Observable<Throwable> throwableObservable =
+                wpyToken.filter(Notification::isOnError)
+                        .map(Notification::getThrowable);
+
+        new ApiErrorHandler(mActivity).handleError(throwableObservable);
+
     }
 
-    private void laterLogin(){
+    private void laterLogin() {
         Toast.makeText(mActivity, "laterloginClicked", Toast.LENGTH_SHORT).show();
     }
 }

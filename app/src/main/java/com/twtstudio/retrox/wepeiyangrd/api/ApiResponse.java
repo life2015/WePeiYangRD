@@ -31,7 +31,12 @@ public class ApiResponse<T> implements Serializable {
     }
 
     public T getData() {
-        return data;
+        if (error_code == -1){
+            return data;
+        }else {
+            throw new ApiException(error_code,message);
+        }
+
     }
 
     public void setData(T data) {
