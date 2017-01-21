@@ -3,6 +3,8 @@ package com.twtstudio.retrox.wepeiyangrd.api;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.orhanobut.logger.Logger;
 import com.twtstudio.retrox.wepeiyangrd.JniUtils;
 import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
@@ -61,11 +63,15 @@ public class ApiClient {
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .build();
 
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(new ApiTypeAdapterFactory("data"))
+                .create();
+
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("https://open.twtstudio.com/api/v1/")
                 .client(client)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         mService = mRetrofit.create(Api.class);

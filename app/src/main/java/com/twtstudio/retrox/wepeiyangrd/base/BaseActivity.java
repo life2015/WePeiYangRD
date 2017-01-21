@@ -1,5 +1,7 @@
 package com.twtstudio.retrox.wepeiyangrd.base;
 
+import com.kelin.mvvmlight.messenger.Messenger;
+
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
@@ -7,4 +9,10 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 
 public class BaseActivity extends SupportActivity {
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Messenger.getDefault().unregister(this);
+    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class GpaBean implements Serializable {
 
-
     public Stat stat;//整体分数情况
     public List<Term> data;//各学期列表
     public String updated_at;//更新时间
