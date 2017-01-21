@@ -5,20 +5,22 @@
     <data>
         <variable
             name="viewModel"
-            type="com.twtstudio.retrox.wepeiyangrd.home.tools.ToolsFragViewModel"/>
+            type="com.twtstudio.retrox.wepeiyangrd.home.common.CommonFragViewModel"/>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+        <import type="android.view.View" />
+
     </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-
+        android:background="@color/background_gray"
+        android:orientation="vertical">
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            bind:layoutManager="@{LayoutManagers.linear()}"
             bind:itemView="@{viewModel.itemView}"
-            bind:items="@{viewModel.itemList}"/>
-
+            bind:items="@{viewModel.viewModelList}"
+            />
     </LinearLayout>
 </layout>

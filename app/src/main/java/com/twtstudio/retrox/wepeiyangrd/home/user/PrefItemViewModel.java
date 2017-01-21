@@ -36,8 +36,9 @@ public class PrefItemViewModel implements ViewModel {
 
     public ViewStyle viewStyle = new ViewStyle();
 
-    public class ViewStyle{
-       public final ObservableBoolean switchable = new ObservableBoolean(false);
+    public class ViewStyle {
+        public final ObservableBoolean switchable = new ObservableBoolean(false);
+        public final ObservableBoolean isMargin = new ObservableBoolean(false);
     }
 
     public ReplyCommand clickCommand = new ReplyCommand(this::onClick);
@@ -49,34 +50,35 @@ public class PrefItemViewModel implements ViewModel {
     }
 
 
-    private void init(){
+    private void init() {
 
         int mode = mMode;
-        if (mode == NIGHTMODE){
-            imageRes.set(R.mipmap.ic_launcher);
-            title.set("NIGHTMODE");
+        if (mode == NIGHTMODE) {
+            imageRes.set(R.drawable.ic_nightmode);
+            title.set("夜间模式");
 
+            viewStyle.isMargin.set(true);
             viewStyle.switchable.set(true);
             preference.set(HawkUtil.getThemeMode());
-        }else if (mode == TJUOFFICAL){
+        } else if (mode == TJUOFFICAL) {
             // TODO: 2017/1/14 tju bind ?
-        }else if (mode == SETTINGS){
+        } else if (mode == SETTINGS) {
             // TODO: 2017/1/14 jump to settings
         }
 
         preference.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
-                ObservableBoolean observableBoolean = (ObservableBoolean) observable;
-                if (mMode == NIGHTMODE){
-                    HawkUtil.setThemeMode(observableBoolean.get());
+                //ObservableBoolean observableBoolean = (ObservableBoolean) observable;
+                if (mMode == NIGHTMODE) {
+                    HawkUtil.setThemeMode(preference.get());
                 }
             }
         });
 
     }
 
-    private void onClick(){
+    private void onClick() {
         Logger.d("pref click");
     }
 

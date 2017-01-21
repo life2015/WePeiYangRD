@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -7,48 +8,61 @@
             name="viewModel"
             type="com.twtstudio.retrox.wepeiyangrd.home.user.PrefItemViewModel"/>
 
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
     </data>
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#ffff"
-        android:orientation="horizontal"
-        android:padding="12dp"
-        bind:clickCommand="@{viewModel.clickCommand}"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            bind:placeholderImageRes="@{viewModel.imageRes}"
-            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="@color/background_gray"
+            android:visibility="@{viewModel.viewStyle.isMargin ? View.VISIBLE : View.GONE}"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/imageView"
-            android:gravity="center_vertical"
-            android:text="@{viewModel.title}"
-            />
+        <RelativeLayout
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical"
-            android:checked="@={viewModel.preference}"
-            android:visibility="@{viewModel.viewStyle.switchable ? View.VISIBLE : View.GONE}"/>
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#ffff"
+            bind:clickCommand="@{viewModel.clickCommand}"
+            >
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="24dp"
+                android:tint="#bbbbbb"
+                bind:placeholderImageRes="@{viewModel.imageRes}"
+                />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/imageView"
+                android:gravity="center_vertical"
+                android:text="@{viewModel.title}"
+                />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="15dp"
+                android:checked="@={viewModel.preference}"
+                android:gravity="center_vertical"
+                android:visibility="@{viewModel.viewStyle.switchable ? View.VISIBLE : View.GONE}"/>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
 </layout>

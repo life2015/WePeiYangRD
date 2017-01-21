@@ -2,6 +2,7 @@ package com.twtstudio.retrox.wepeiyangrd;
 
 /**
  * Created by sunjuntao on 16/1/7.
+ * gg
  */
 public class JniUtils {
 //    static {

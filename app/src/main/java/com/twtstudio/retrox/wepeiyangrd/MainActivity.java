@@ -11,6 +11,7 @@ import com.twtstudio.retrox.wepeiyangrd.auth.login.LoginViewModel;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseFragment;
 import com.twtstudio.retrox.wepeiyangrd.home.common.oneItem.OneInfoViewModel;
+import com.twtstudio.retrox.wepeiyangrd.module.gpa.GpaViewModel;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -26,20 +27,32 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         mButton = (Button) findViewById(R.id.button);
-        mButton.setOnClickListener(v -> test1());
+        mButton.setOnClickListener(v -> test2());
+
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(v -> test());
     }
 
     private void test() {
-        ApiClient.getService().login("miss976885345", "JCYwin551100")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(tokenApiResponse -> Logger.d(tokenApiResponse.getData().token));
+//        ApiClient.getService().login("miss976885345", "JCYwin551100")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(tokenApiResponse -> Logger.d(tokenApiResponse.getData().token));
 
+        LoginViewModel viewModel = new LoginViewModel(this);
+        viewModel.twtuName.set("miss976885345");
+        viewModel.twtpasswd.set("JCYwin551100");
+        viewModel.onLoginClickCommand.execute();
     }
 
     private void test1(){
         BaseFragment fragment = new BaseFragment();
         OneInfoViewModel viewModel = new OneInfoViewModel(fragment);
+    }
+
+    private void test2(){
+        GpaViewModel viewModel = new GpaViewModel(this);
+        viewModel.getData();
     }
 
 }

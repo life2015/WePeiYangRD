@@ -18,9 +18,9 @@ public class AvatarItemViewModel implements ViewModel {
 
     //field
     public final ObservableField<String> avatarUrl = new ObservableField<>();
-    public final ObservableField<String> userName = new ObservableField<>();
+    public final ObservableField<String> userName = new ObservableField<>("天外天账户名");
     public final ObservableField<String> intro = new ObservableField<>("这个人很懒没有写简介");
-    public final ObservableInt defultAvatar = new ObservableInt(R.mipmap.ic_launcher);
+    public final ObservableInt defultAvatar = new ObservableInt(R.drawable.haibo);
 
     public final ReplyCommand onEditClick = new ReplyCommand(this::editIntro);
 

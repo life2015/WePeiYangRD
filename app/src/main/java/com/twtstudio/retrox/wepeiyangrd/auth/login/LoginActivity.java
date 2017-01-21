@@ -1,10 +1,12 @@
 package com.twtstudio.retrox.wepeiyangrd.auth.login;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.twtstudio.retrox.wepeiyangrd.R;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
+import com.twtstudio.retrox.wepeiyangrd.databinding.ActivityLoginBinding;
 
 /**
  * Created by retrox on 2016/11/27.
@@ -15,7 +17,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_login);
+        binding.setViewModel(new LoginViewModel(this));
 
 //        LoginViewModel viewModel = new LoginViewModel(this);
 //        viewModel.twtuName.set("miss976885345");
