@@ -1,12 +1,17 @@
 package com.twtstudio.retrox.wepeiyangrd.module.gpa;
 
+import android.databinding.ObservableField;
+
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.messenger.Messenger;
 import com.orhanobut.logger.Logger;
 import com.twtstudio.retrox.wepeiyangrd.api.ApiClient;
+import com.twtstudio.retrox.wepeiyangrd.api.ApiErrorHandler;
 import com.twtstudio.retrox.wepeiyangrd.api.ApiResponse;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 
+import rx.Notification;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -16,21 +21,34 @@ import rx.schedulers.Schedulers;
 
 public class GpaViewModel implements ViewModel {
 
+    public static final String TOKEN_GPA_LOAD_FINISHED = "token_gpa_load_finished";
+
     //绑定生命周期用
     private BaseActivity mActivity;
 
-    public void getData(){
-        ApiClient.getService()
-                .getGpa()
-                .subscribeOn(Schedulers.io())
+    //public final ObservableField<GpaBean> obGpaBean = new ObservableField<>();
+
+    public void getData() {
+        Observable<Notification<ApiResponse<GpaBean>>> gpaObservable =
+                ApiClient.getService()
+                        .getGpa()
+                        .subscribeOn(Schedulers.io())
+                        .compose(mActivity.bindToLifecycle())
+                        .materialize().share();
+
+        gpaObservable.filter(Notification::isOnNext)
+                .map(Notification::getValue)
                 .map(ApiResponse::getData)
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(mActivity.bindToLifecycle())
                 .subscribe(gpaBean -> {
-                    Logger.d(gpaBean);
-                },Throwable::printStackTrace);
+                    //obGpaBean.set(gpaBean);
+                    Messenger.getDefault().send(gpaBean, TOKEN_GPA_LOAD_FINISHED);
+                });
 
-        Messenger.getDefault().sendNoMsg("TOken");
+        ApiErrorHandler handler = new ApiErrorHandler(mActivity);
+
+        handler.handleError(gpaObservable.filter(Notification::isOnError)
+                .map(Notification::getThrowable));
 
     }
 
