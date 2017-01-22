@@ -34,14 +34,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void test() {
-//        ApiClient.getService().login("miss976885345", "JCYwin551100")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(tokenApiResponse -> Logger.d(tokenApiResponse.getData().token));
 
         LoginViewModel viewModel = new LoginViewModel(this);
-        viewModel.twtuName.set("miss976885345");
-        viewModel.twtpasswd.set("JCYwin551100");
+        viewModel.twtuName.set("test");
+        viewModel.twtpasswd.set("test");
         viewModel.onLoginClickCommand.execute();
     }
 
@@ -52,7 +48,7 @@ public class MainActivity extends BaseActivity {
 
     private void test2(){
         GpaViewModel viewModel = new GpaViewModel(this);
-        viewModel.getData();
+        //viewModel.getData();
     }
 
 }

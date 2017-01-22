@@ -12,6 +12,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 
 /**
+ * @deprecated Something wrong happened while handling GPA , ApiResponse<T> recommended
  * Created by dingzhihu on 15/5/7.
  * modified by retrox on 17/1/21.
  */

@@ -52,7 +52,7 @@ public class CommonFragViewModel implements ViewModel {
     private void initList(){
         viewModelList.add(new OneInfoViewModel(mFragment));
 
-        //viewModelList.add(new GpaItemViewModel((BaseActivity) mFragment.getActivity()));
+        viewModelList.add(new GpaItemViewModel((BaseActivity) mFragment.getActivity()));
         // FIXME: 2017/1/21 gpa null exception
     }
 }

@@ -29,16 +29,16 @@ public class GpaViewModel implements ViewModel {
     //public final ObservableField<GpaBean> obGpaBean = new ObservableField<>();
 
     public void getData() {
-        Observable<Notification<ApiResponse<GpaBean>>> gpaObservable =
+        Observable<Notification<GpaBean>> gpaObservable =
                 ApiClient.getService()
                         .getGpa()
                         .subscribeOn(Schedulers.io())
                         .compose(mActivity.bindToLifecycle())
+                        .map(ApiResponse::getData)
                         .materialize().share();
 
         gpaObservable.filter(Notification::isOnNext)
                 .map(Notification::getValue)
-                .map(ApiResponse::getData)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(gpaBean -> {
                     //obGpaBean.set(gpaBean);
@@ -55,4 +55,5 @@ public class GpaViewModel implements ViewModel {
     public GpaViewModel(BaseActivity activity) {
         mActivity = activity;
     }
+
 }

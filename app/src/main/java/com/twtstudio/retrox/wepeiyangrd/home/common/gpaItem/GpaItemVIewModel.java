@@ -25,9 +25,9 @@ public class GpaItemViewModel implements ViewModel {
     }
 
     private void init() {
-        getData();
         Messenger.getDefault().register(mContext, GpaViewModel.TOKEN_GPA_LOAD_FINISHED,
                 GpaBean.class, observableGpa::set);
+        getData();
     }
 
     private void getData() {

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
 import java.io.IOException;
 
 import rx.Observable;
@@ -22,21 +24,25 @@ public class ApiErrorHandler {
     }
 
     public void handleError(Observable<Throwable> throwableObservable) {
+
         ReplaySubject<Throwable> ioErrorHandler = ReplaySubject.create();
         ReplaySubject<Throwable> apiErrorHandler = ReplaySubject.create();
-        ReplaySubject<Throwable> httpErrorHandler = ReplaySubject.create();
+        ReplaySubject<Throwable> throwableReplaySubject = ReplaySubject.create();
 
         throwableObservable = throwableObservable.distinct()
                 .takeUntil(throwable -> throwable.getCause()==null);
 
         throwableObservable.subscribe(ioErrorHandler);
         throwableObservable.subscribe(apiErrorHandler);
-        //throwableObservable.subscribe(httpErrorHandler);
+        throwableObservable.subscribe(throwableReplaySubject);
+
+        throwableReplaySubject.subscribe(Throwable::printStackTrace);
 
         ioErrorHandler.filter(throwable -> throwable instanceof IOException)
                 .cast(IOException.class)
                 .subscribe((error) -> {
                     Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
+                    Logger.e("error",error);
                 });
 
         apiErrorHandler.filter(throwable -> throwable instanceof ApiException)
@@ -46,6 +52,7 @@ public class ApiErrorHandler {
                      * test code
                      */
                     Toast.makeText(mContext, e.error_code, Toast.LENGTH_SHORT).show();
+                    Logger.e("error",e);
 //                    switch (e.error_code){
 //                        case 10000:
 //                        case 10001:

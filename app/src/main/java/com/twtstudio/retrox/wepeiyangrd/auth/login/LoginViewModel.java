@@ -63,17 +63,17 @@ public class LoginViewModel implements ViewModel {
     private void login() {
         mViewStyle.isProgressRefreshing.set(true);
 
-        Observable<Notification<ApiResponse<Token>>> wpyToken = ApiClient.getService()
+        Observable<Notification<Token>> wpyToken = ApiClient.getService()
                 .login(twtuName.get(), twtpasswd.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(mActivity.bindToLifecycle())
+                .map(ApiResponse::getData)
                 .materialize()
                 .share();
 
         wpyToken.filter(Notification::isOnNext)
                 .map(Notification::getValue)
-                .map(ApiResponse::getData)
                 .doAfterTerminate(() -> mViewStyle.isProgressRefreshing.set(false))
                 .subscribe(token -> {
                     HawkUtil.setToken(token.token);

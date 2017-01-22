@@ -24,6 +24,9 @@ public class GpaChartBindingAdapter {
     @BindingAdapter({"gpaData"})
     public static void setGpaChartData(LineChart chart, final GpaBean gpaBean){
 
+        if (gpaBean == null){
+            return;
+        }
         chart.setNoDataText("还没有成绩哟");
         chart.setDrawGridBackground(false);
         chart.setDragEnabled(false);

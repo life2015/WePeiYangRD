@@ -71,15 +71,15 @@ public class ApiClient {
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .build();
 
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapterFactory(new ApiTypeAdapterFactory("data"))
-                .create();
+//        Gson gson = new GsonBuilder()
+//                .registerTypeAdapterFactory(new ApiTypeAdapterFactory("data"))
+//                .create();
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl("https://open.twtstudio.com/api/v1/")
                 .client(client)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         mService = mRetrofit.create(Api.class);
