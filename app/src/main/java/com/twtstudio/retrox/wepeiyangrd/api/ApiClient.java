@@ -3,10 +3,14 @@ package com.twtstudio.retrox.wepeiyangrd.api;
 
 import android.util.Log;
 
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.BiFunction;
+import com.annimon.stream.function.Function;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.orhanobut.logger.Logger;
 import com.twtstudio.retrox.wepeiyangrd.JniUtils;
+import com.twtstudio.retrox.wepeiyangrd.R;
 import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
 import com.twtstudio.retrox.wepeiyangrd.support.PrefUtils;
 
@@ -17,9 +21,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collector;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -113,28 +121,24 @@ public class ApiClient {
             return chain.proceed(builder.build());
         }
 
-        protected HttpUrl convert(HttpUrl originUrl) {
-            Set<String> keys = originUrl.queryParameterNames();
-            //获得的set无法被编辑
-            //keys.add("t");
+        HttpUrl convert(HttpUrl originUrl) {
+
             String timestamp = String.valueOf(Calendar.getInstance().getTimeInMillis());
 
-            List<String> keysList = new ArrayList<>(keys);
-            //在这里添加
+            List<String> keysList = new ArrayList<>(originUrl.queryParameterNames());
             keysList.add("t");
             Collections.sort(keysList);
 
-            StringBuilder builder = new StringBuilder();
-            builder.append(JniUtils.getInstance().getAppKey());
-            for (String key : keysList) {
-                if ("t".equals(key)) {
-                    builder.append(key).append(timestamp);
-                } else {
-                    builder.append(key).append(originUrl.queryParameter(key));
+            String keys = Stream.of(keysList).map(s1 -> {
+                if ("t".equals(s1)){
+                    s1 += timestamp;
+                }else {
+                    s1 += originUrl.queryParameter(s1);
                 }
-            }
-            builder.append(JniUtils.getInstance().getAppSecret());
-            String sign = new String(Hex.encodeHex(DigestUtils.sha(builder.toString()))).toUpperCase();
+                return s1;
+            }).reduce((value1, value2) -> value1 + value2).get();
+
+            String sign = new String(Hex.encodeHex(DigestUtils.sha(JniUtils.getInstance().getAppKey() + keys + JniUtils.getInstance().getAppSecret()))).toUpperCase();
 
             return originUrl.newBuilder()
                     .addQueryParameter("t", timestamp)
