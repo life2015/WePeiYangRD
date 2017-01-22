@@ -60,6 +60,8 @@ dependencies {
     //logger
     compile 'com.orhanobut:logger:1.15'
 
+    compile 'com.annimon:stream:1.1.4'
+
     compile 'com.orhanobut:hawk:2.0.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'

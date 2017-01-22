@@ -8,3 +8,6 @@
 /captures
 .externalNativeBuild
 JniUtils
+.idea/vcs.xml
+.idea/gradle.xml
+.idea/encodings.xml
