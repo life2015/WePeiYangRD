@@ -57,15 +57,20 @@ public class GpaChartBindingAdapter {
         ArrayList<String> xVals = new ArrayList<>();
         ArrayList<Entry> yVals = new ArrayList<>();
 
-        for (GpaBean.Term term : gpaBean.data) {
-            int i = 0;
-            xVals.add(term.name);
-            yVals.add(new Entry((float) term.stat.score,i));
-            i++;
+//        for (GpaBean.Term term : gpaBean.data) {
+//            int i = 0;
+//            xVals.add(term.name);
+//            yVals.add(new Entry((float) term.stat.score,i));
+//            i++;
+//        }
+
+        for (int i = 0; i < gpaBean.data.size(); i++) {
+            yVals.add(new Entry(i,(float)gpaBean.data.get(i).stat.score));
         }
 
 
         LineDataSet dataSet = new LineDataSet(yVals,"label");
+//        LineDataSet xdataSet = new LineDataSet()
 
         LineData lineData = new LineData(dataSet);
 

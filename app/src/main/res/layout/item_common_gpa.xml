@@ -11,7 +11,7 @@
               android:layout_height="wrap_content">
 <com.github.mikephil.charting.charts.LineChart
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
     app:gpaData="@{viewModel.observableGpa}"/>
 </LinearLayout>
 </layout>
