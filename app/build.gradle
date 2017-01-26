@@ -45,8 +45,8 @@ dependencies {
 //    compile project(':navigationbottom')
     compile project(':fragmentation')
     compile project(':commons')
+    compile project(':gpa')
 
 
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }

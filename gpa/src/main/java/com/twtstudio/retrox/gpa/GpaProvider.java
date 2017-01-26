@@ -29,14 +29,14 @@ public class GpaProvider  {
 
     private Action1<GpaBean> action;
 
-    public GpaProvider(RxAppCompatActivity activity) {
+    private GpaProvider(RxAppCompatActivity activity) {
         mActivity = activity;
     }
 
-    public GpaProvider(RxAppCompatActivity activity, Action1<GpaBean> action) {
-        mActivity = activity;
-        this.action = action;
-    }
+//    public GpaProvider(RxAppCompatActivity activity, Action1<GpaBean> action) {
+//        mActivity = activity;
+//        this.action = action;
+//    }
 
     public void getData() {
         Observable<Notification<GpaBean>> gpaObservable =
@@ -64,6 +64,15 @@ public class GpaProvider  {
         handler.handleError(gpaObservable.filter(Notification::isOnError)
                 .map(Notification::getThrowable));
 
+    }
+
+    public static GpaProvider init(RxAppCompatActivity rxActivity){
+        return new GpaProvider(rxActivity);
+    }
+
+    public GpaProvider registerAction(Action1<GpaBean> action){
+        this.action = action;
+        return this;
     }
 
 }
