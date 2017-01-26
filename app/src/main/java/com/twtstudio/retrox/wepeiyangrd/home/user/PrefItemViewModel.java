@@ -9,9 +9,8 @@ import android.databinding.ObservableInt;
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
 import com.orhanobut.logger.Logger;
-import com.twtstudio.retrox.wepeiyangrd.BR;
+import com.twt.wepeiyang.commons.utils.CommonPrefUtil;
 import com.twtstudio.retrox.wepeiyangrd.R;
-import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
 
 /**
  * Created by retrox on 2017/1/14.
@@ -59,7 +58,7 @@ public class PrefItemViewModel implements ViewModel {
 
             viewStyle.isMargin.set(true);
             viewStyle.switchable.set(true);
-            preference.set(HawkUtil.getThemeMode());
+            preference.set(CommonPrefUtil.getThemeMode());
         } else if (mode == TJUOFFICAL) {
             // TODO: 2017/1/14 tju bind ?
         } else if (mode == SETTINGS) {
@@ -71,7 +70,7 @@ public class PrefItemViewModel implements ViewModel {
             public void onPropertyChanged(Observable observable, int i) {
                 //ObservableBoolean observableBoolean = (ObservableBoolean) observable;
                 if (mMode == NIGHTMODE) {
-                    HawkUtil.setThemeMode(preference.get());
+                    CommonPrefUtil.setThemeMode(preference.get());
                 }
             }
         });

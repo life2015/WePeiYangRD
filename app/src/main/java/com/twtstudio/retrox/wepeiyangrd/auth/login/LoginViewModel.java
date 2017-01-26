@@ -8,12 +8,11 @@ import android.widget.Toast;
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
 import com.twtstudio.retrox.wepeiyangrd.api.ApiClient;
-import com.twtstudio.retrox.wepeiyangrd.api.ApiErrorHandler;
-import com.twtstudio.retrox.wepeiyangrd.api.ApiResponse;
+import com.twt.wepeiyang.commons.network.ApiErrorHandler;
+import com.twt.wepeiyang.commons.network.ApiResponse;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 import com.twtstudio.retrox.wepeiyangrd.home.HomeActivity;
-import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
-import com.twtstudio.retrox.wepeiyangrd.support.PrefUtils;
+import com.twt.wepeiyang.commons.utils.CommonPrefUtil;
 
 import rx.Notification;
 import rx.Observable;
@@ -76,8 +75,8 @@ public class LoginViewModel implements ViewModel {
                 .map(Notification::getValue)
                 .doAfterTerminate(() -> mViewStyle.isProgressRefreshing.set(false))
                 .subscribe(token -> {
-                    HawkUtil.setToken(token.token);
-                    HawkUtil.setIsLogin(true);
+                    CommonPrefUtil.setToken(token.token);
+                    CommonPrefUtil.setIsLogin(true);
                     Toast.makeText(mActivity, "登陆成功", Toast.LENGTH_SHORT).show();
                     // TODO: 2016/11/27 jump to home page
                     Intent intent = new Intent(mActivity, HomeActivity.class);

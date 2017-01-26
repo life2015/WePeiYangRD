@@ -9,7 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/commons" />
             <option value="$PROJECT_DIR$/fragmentation" />
+            <option value="$PROJECT_DIR$/gpa" />
             <option value="$PROJECT_DIR$/mvvmKit" />
           </set>
         </option>

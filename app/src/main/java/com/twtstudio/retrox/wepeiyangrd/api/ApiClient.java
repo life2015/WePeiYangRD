@@ -1,18 +1,10 @@
 package com.twtstudio.retrox.wepeiyangrd.api;
 
 
-import android.util.Log;
-
 import com.annimon.stream.Stream;
-import com.annimon.stream.function.BiFunction;
-import com.annimon.stream.function.Function;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.orhanobut.logger.Logger;
-import com.twtstudio.retrox.wepeiyangrd.JniUtils;
-import com.twtstudio.retrox.wepeiyangrd.R;
-import com.twtstudio.retrox.wepeiyangrd.support.HawkUtil;
-import com.twtstudio.retrox.wepeiyangrd.support.PrefUtils;
+import com.twt.wepeiyang.commons.JniUtils;
+import com.twt.wepeiyang.commons.utils.CommonPrefUtil;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -21,13 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collector;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -113,10 +100,10 @@ public class ApiClient {
 
             Request.Builder builder = originRequest.newBuilder()
 //                    .addHeader("User-Agent", UserAgent.generate())
-                    .addHeader("Authorization", "Bearer{"+HawkUtil.getToken()+"}")
+                    .addHeader("Authorization", "Bearer{"+ CommonPrefUtil.getToken()+"}")
                     .url(newUrl);
 
-            Logger.d("token-->"+HawkUtil.getToken());
+            Logger.d("token-->"+ CommonPrefUtil.getToken());
 
             return chain.proceed(builder.build());
         }

@@ -1,13 +1,12 @@
 package com.twtstudio.retrox.wepeiyangrd.home.common.gpaItem;
 
-import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.messenger.Messenger;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
-import com.twtstudio.retrox.wepeiyangrd.module.gpa.GpaBean;
-import com.twtstudio.retrox.wepeiyangrd.module.gpa.GpaViewModel;
+import com.twtstudio.retrox.gpa.core.GpaBean;
+import com.twtstudio.retrox.gpa.core.GpaViewModel;
 
 /**
  * Created by retrox on 2017/1/21.

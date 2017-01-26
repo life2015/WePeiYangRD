@@ -8,7 +8,7 @@ import com.twtstudio.retrox.wepeiyangrd.WePeiYangApp;
 
 /**
  * Created by Rex on 2015/8/3.
- * @deprecated moved to HawkUtil for Security reasons
+ * @deprecated moved to CommonPrefUtil for Security reasons
  */
 public class PrefUtils {
 

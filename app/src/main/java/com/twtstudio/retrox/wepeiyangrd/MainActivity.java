@@ -1,20 +1,13 @@
 package com.twtstudio.retrox.wepeiyangrd;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-import com.orhanobut.logger.Logger;
-import com.twtstudio.retrox.wepeiyangrd.api.ApiClient;
 import com.twtstudio.retrox.wepeiyangrd.auth.login.LoginViewModel;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseFragment;
 import com.twtstudio.retrox.wepeiyangrd.home.common.oneItem.OneInfoViewModel;
-import com.twtstudio.retrox.wepeiyangrd.module.gpa.GpaViewModel;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import com.twtstudio.retrox.gpa.core.GpaViewModel;
 
 
 public class MainActivity extends BaseActivity {
@@ -25,6 +18,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mButton = (Button) findViewById(R.id.button);
         mButton.setOnClickListener(v -> test2());

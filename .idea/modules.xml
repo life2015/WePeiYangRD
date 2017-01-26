@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WePeiYangRD.iml" filepath="$PROJECT_DIR$/WePeiYangRD.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
       <module fileurl="file://$PROJECT_DIR$/fragmentation/fragmentation.iml" filepath="$PROJECT_DIR$/fragmentation/fragmentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gpa/gpa.iml" filepath="$PROJECT_DIR$/gpa/gpa.iml" />
       <module fileurl="file://$PROJECT_DIR$/mvvmKit/mvvmKit.iml" filepath="$PROJECT_DIR$/mvvmKit/mvvmKit.iml" />
     </modules>
   </component>

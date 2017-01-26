@@ -1,8 +1,8 @@
 package com.twtstudio.retrox.wepeiyangrd.api;
 
+import com.twt.wepeiyang.commons.network.ApiResponse;
 import com.twtstudio.retrox.wepeiyangrd.auth.login.Token;
 import com.twtstudio.retrox.wepeiyangrd.home.common.oneItem.OneInfoBean;
-import com.twtstudio.retrox.wepeiyangrd.module.gpa.GpaBean;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -23,8 +23,6 @@ public interface Api {
     @GET("auth/token/get")
     Observable<ApiResponse<Token>> login(@Query("twtuname") String twtuname, @Query("twtpasswd") String twtpasswd);
 
-    @GET("gpa")
-    Observable<ApiResponse<GpaBean>> getGpa();
 
     @GET("http://rest.wufazhuce.com/OneForWeb/one/getHpinfo")
     Observable<OneInfoBean> getOneHpInfo(@Query("strDate") String date);
