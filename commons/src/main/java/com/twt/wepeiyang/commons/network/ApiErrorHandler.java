@@ -8,6 +8,7 @@ import com.orhanobut.logger.Logger;
 import java.io.IOException;
 
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.subjects.ReplaySubject;
 
 /**
@@ -39,19 +40,21 @@ public class ApiErrorHandler {
 
         ioErrorHandler.filter(throwable -> throwable instanceof IOException)
                 .cast(IOException.class)
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe((error) -> {
                     Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
-                    Logger.e("error",error);
-                });
+                    Logger.e(error,"error");
+                },Throwable::printStackTrace);
 
         apiErrorHandler.filter(throwable -> throwable instanceof ApiException)
                 .cast(ApiException.class)
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe(e -> {
                     /**
                      * test code
                      */
                     Toast.makeText(mContext, e.error_code, Toast.LENGTH_SHORT).show();
-                    Logger.e("error",e);
+                    Logger.e(e,"error");
 //                    switch (e.error_code){
 //                        case 10000:
 //                        case 10001:
