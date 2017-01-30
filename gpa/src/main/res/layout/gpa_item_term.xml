@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:gpa="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.twtstudio.retrox.gpa.view.TermDetailViewModel"/>
+    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.github.mikephil.charting.charts.RadarChart
+        gpa:gpaRadar="@{viewModel.courseViewModels}"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="300dp"
+        android:id="@+id/radarChart"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        bind:viewModels="@{viewModel.courseViewModels}"
+        bind:itemView="@{viewModel.itemView}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
+</layout>

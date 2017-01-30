@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableArrayList;
 
 import com.kelin.mvvmlight.base.ViewModel;
+import com.twtstudio.retrox.gpa.view.GpaActivity;
 import com.twtstudio.retrox.wepeiyangrd.BR;
 import com.twtstudio.retrox.wepeiyangrd.MainActivity;
 import com.twtstudio.retrox.wepeiyangrd.R;
@@ -29,7 +30,7 @@ public class ToolsFragViewModel implements ViewModel {
 
     private void init(){
         itemList.add(new ToolItemViewModel(mContext,R.drawable.ic_main_schedule,"课程表", MainActivity.class));
-        itemList.add(new ToolItemViewModel(mContext,R.drawable.ic_main_gpa,"GPA", MainActivity.class));
+        itemList.add(new ToolItemViewModel(mContext,R.drawable.ic_main_gpa,"GPA", GpaActivity.class));
         itemList.add(new ToolItemViewModel(mContext,R.drawable.ic_main_bike,"哲学车", MainActivity.class));
         itemList.add(new ToolItemViewModel(mContext,R.drawable.ic_main_party,"党建", MainActivity.class));
         itemList.add(new ToolItemViewModel(mContext,R.drawable.ic_main_read,"图书馆", MainActivity.class));

@@ -15,6 +15,9 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.kelin.mvvmlight.command.ReplyCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,19 +28,19 @@ import java.util.List;
 
 public class GpaChartBindingAdapter {
 
-    @BindingAdapter({"gpaData"})
-    public static void setGpaChartData(LineChart chart, final GpaBean gpaBean){
+    @BindingAdapter(value={"gpaData","valueCommand"},requireAll = false)
+    public static void setGpaChartData(LineChart chart, final GpaBean gpaData, final ReplyCommand<Integer> valueCommand){
 
         Description description = new Description();
         description.setText("GPA图示");
         chart.setDescription(description);
         chart.setNoDataText("还没有成绩哟");
 
-        if (gpaBean == null){
+        if (gpaData == null){
             return;
         }
 
-        List<String> xVals = Stream.of(gpaBean.data)
+        List<String> xVals = Stream.of(gpaData.data)
                 .map(term -> term.name)
                 .collect(Collectors.toList());
 
@@ -79,12 +82,12 @@ public class GpaChartBindingAdapter {
         ArrayList<Entry> yVals = new ArrayList<>();
 
 
-        for (int i = 0; i < gpaBean.data.size(); i++) {
-            yVals.add(new Entry(i,(float)gpaBean.data.get(i).stat.score));
+        for (int i = 0; i < gpaData.data.size(); i++) {
+            yVals.add(new Entry(i,(float)gpaData.data.get(i).stat.score));
         }
 
 
-        LineDataSet dataSet = new LineDataSet(yVals,"加权成绩: "+String.valueOf(gpaBean.stat.total.score));
+        LineDataSet dataSet = new LineDataSet(yVals,"加权成绩: "+String.valueOf(gpaData.stat.total.score));
 //        LineDataSet xdataSet = new LineDataSet()
 
         dataSet.setDrawFilled(true);
@@ -101,6 +104,20 @@ public class GpaChartBindingAdapter {
         dataSet.setValueTextColor(colorPink);
 
         LineData lineData = new LineData(dataSet);
+
+        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                if (valueCommand!=null){
+                    valueCommand.execute((int) e.getX());
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
 
         chart.setData(lineData);
         chart.invalidate();

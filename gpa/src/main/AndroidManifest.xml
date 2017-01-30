@@ -6,6 +6,7 @@
                  android:supportsRtl="true"
     >
 
+        <activity android:name=".view.GpaActivity" android:theme="@style/GPATheme"/>
     </application>
 
 </manifest>

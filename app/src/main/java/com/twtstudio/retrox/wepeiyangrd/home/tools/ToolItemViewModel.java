@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
+import android.support.v7.app.AppCompatActivity;
 
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
@@ -17,7 +18,7 @@ public class ToolItemViewModel implements ViewModel {
 
     private Context mContext;
 
-    private Class<? extends BaseActivity> targetAct;
+    private Class<? extends AppCompatActivity> targetAct;
 
     public final ObservableInt iconRes = new ObservableInt();
 
@@ -25,7 +26,7 @@ public class ToolItemViewModel implements ViewModel {
 
     public final ReplyCommand clickCommand = new ReplyCommand(this::jump);
 
-    public ToolItemViewModel(Context context, int iconres, String title, Class<? extends BaseActivity> activityClass) {
+    public ToolItemViewModel(Context context, int iconres, String title, Class<? extends AppCompatActivity> activityClass) {
         mContext = context;
         this.iconRes.set(iconres);
         this.title.set(title);
