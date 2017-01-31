@@ -25,19 +25,8 @@ public class CommonFragViewModel implements ViewModel {
 
     public final ObservableArrayList<ViewModel> viewModelList = new ObservableArrayList<>();
 
-    /**
-     * 思考更优化的解决方案
-     * itemClassSelector?
-     */
-    // TODO: 2017/1/16 better solution???
-//    public final ItemViewSelector<ViewModel> itemView = new BaseItemViewSelector<ViewModel>() {
-//        @Override
-//        public void select(ItemView itemView, int position, ViewModel item) {
-//            if (position == 0){
-//                itemView.set(BR.viewModel, R.layout.item_common_one);
-//            }
-//        }
-//    };
+    private OneInfoViewModel mOneInfoViewModel;
+    private GpaItemViewModel mGpaItemViewModel;
 
     public final ItemViewSelector itemView = ItemViewClassSelector.builder()
             .put(OneInfoViewModel.class,BR.viewModel,R.layout.item_common_one)
@@ -50,9 +39,14 @@ public class CommonFragViewModel implements ViewModel {
     }
 
     private void initList(){
-        viewModelList.add(new OneInfoViewModel(mFragment));
+        mOneInfoViewModel = new OneInfoViewModel(mFragment);
+        viewModelList.add(mOneInfoViewModel);
 
-        viewModelList.add(new GpaItemViewModel((BaseActivity) mFragment.getActivity()));
-        // FIXME: 2017/1/21 gpa null exception
+        mGpaItemViewModel = new GpaItemViewModel((BaseActivity) mFragment.getActivity());
+        viewModelList.add(mGpaItemViewModel);
+    }
+
+    private void refresh(){
+        mGpaItemViewModel.getData();
     }
 }

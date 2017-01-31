@@ -1,7 +1,9 @@
 package com.twtstudio.retrox.wepeiyangrd.home;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 
 import com.twtstudio.retrox.wepeiyangrd.R;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
@@ -35,6 +37,10 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("微北洋");
+        toolbar.setTitleTextColor(Color.WHITE);
 
         if (savedInstanceState == null) {
             mFragments[FIRST] = CommonFragment.newInstance();

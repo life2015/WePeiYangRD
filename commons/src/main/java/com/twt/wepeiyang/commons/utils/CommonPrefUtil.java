@@ -5,6 +5,7 @@ import com.orhanobut.hawk.Hawk;
 /**
  * Created by retrox on 2016/12/12.
  * A Secure Preference Control
+ * 用于通用的数据存放，比如说TOKEN，其他的独立数据在自己的module里面写
  */
 
 public class CommonPrefUtil {

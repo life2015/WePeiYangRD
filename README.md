@@ -1,7 +1,168 @@
 # WePeiYangRD
 
-WePeiYang Redesign
-# 微北洋3.0 全新设计  
+WePeiYang Redesign and Refactor
+
+
+
+## 模块化
+
+> **每个功能模块独立开发，共同依赖基础库commons**
+>
+> **自己开发的模块内可以使用自己喜欢的架构和依赖，没有架构也可以，开心就好**
+>
+> **每个模块统一提供Provider模式的对外数据接口**
+>
+> **使用RxJava的Action1接口封装，更好的适配lamdba表达式**
+>
+> 实例代码：
+
+```java
+/**
+ * Created by retrox on 2017/1/17.
+ * 每个模块的对外暴露的数据提供接口，同级无依赖的module无法调用，考虑router统一调用，暂不做实现
+ * 上层依赖模块可以用普通方法调用
+ * 包含一个数据的回调，使用RxJava自带的Action接口实现
+ * 兼容lambda表达式
+ * 内部也可以用
+ */
+
+public class GpaProvider  {
+
+    public static final String TOKEN_GPA_LOAD_FINISHED = "token_gpa_load_finished";
+
+    //绑定生命周期用
+    private RxAppCompatActivity mActivity;
+
+    private Action1<GpaBean> action;
+
+    private GpaProvider(RxAppCompatActivity activity) {
+        mActivity = activity;
+    }
+
+//    public GpaProvider(RxAppCompatActivity activity, Action1<GpaBean> action) {
+//        mActivity = activity;
+//        this.action = action;
+//    }
+
+    public void getData() {
+        Observable<Notification<GpaBean>> gpaObservable =
+                RetrofitProvider.getRetrofit()
+                        .create(GpaApi.class)
+                        .getGpa()
+                        .subscribeOn(Schedulers.io())
+                        .compose(mActivity.bindToLifecycle())
+                        .map(ApiResponse::getData)
+                        .materialize().share();
+
+        gpaObservable.filter(Notification::isOnNext)
+                .map(Notification::getValue)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(gpaBean -> {
+                    //提供模块内的刷新服务，因为数据的bus是不能跨module的
+                    Messenger.getDefault().send(gpaBean, TOKEN_GPA_LOAD_FINISHED);
+                    if (action != null) {
+                        action.call(gpaBean);
+                    }
+                });
+
+        ApiErrorHandler handler = new ApiErrorHandler(mActivity);
+
+        handler.handleError(gpaObservable.filter(Notification::isOnError)
+                .map(Notification::getThrowable));
+
+    }
+
+    public static GpaProvider init(RxAppCompatActivity rxActivity){
+        return new GpaProvider(rxActivity);
+    }
+
+    public GpaProvider registerAction(Action1<GpaBean> action){
+        this.action = action;
+        return this;
+    }
+
+}
+
+```
+
+> 调用示例（lambda）
+
+```java
+GpaProvider.init(mContext)
+                .registerAction(observableGpa::set)
+                .getData();
+```
+
+> 数据提供接口设计：
+>
+> 不必提供模块内所有数据，只需提供首页feed流中需要的数据还要其他的概括性数据
+
+> 模块间的相互调用：
+>
+> 上层模块依赖与下层模块，可以直接调用，activity跳转直接使用Intent即可
+>
+> 下层调用上层或者同级模块相互跳转，需要使用反射
+
+```java
+                    Class clazz = null;
+                    try {
+                        clazz = Class.forName("com.twtstudio.retrox.wepeiyangrd.home.HomeActivity");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(mActivity, clazz);
+                    mActivity.startActivity(intent);
+```
+
+> **暂不引入Router框架**
+>
+> 将来可能会使用。
+
+> 一些不错的参考资料：
+>
+> [**Android架构思考(模块化、多进程)**](http://blog.spinytech.com/2016/12/28/android_modularization/)
+>
+> [**Android业务组件化开发实践**](http://kymjs.com/code/2016/10/18/01/)
+
+
+
+## 基础库 Commons
+
+> 功能：
+>
+> 封装了auth模块，直接使用其中的activity进行跳转
+>
+> 封装网络层，RetrofitProvider封装了签名验证机制
+>
+> 网络异常处理的ErrorHandler（这个用不用随你喽）
+>
+> 网络层的具体情况要看后台的情况，目前的封装只针对于规范API，后台不规范的话可在模块内自己配置RetrofitClient和签名拦截器
+>
+> 封装APP类，通过反射在非app模块获取Application示例
+>
+> 封装公共的Prefences模块，存放Token及一些公共数据
+
+
+
+> 网络封装使用示例：
+>
+> 传入改模块的API接口类即可
+
+```java
+ Observable<Notification<GpaBean>> gpaObservable =
+                RetrofitProvider.getRetrofit()
+                        .create(GpaApi.class)
+                        .getGpa()
+                        .subscribeOn(Schedulers.io())
+                        .compose(mActivity.bindToLifecycle())
+                        .map(ApiResponse::getData)
+                        .materialize().share();
+```
+
+
+
+## 微北洋3.0 全新设计 MVVM篇
+
 -   架构：MVVM + RxJava
 
 ### 依赖：

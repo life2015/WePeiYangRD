@@ -99,6 +99,8 @@ public class GpaRadarBindingAdapter {
                 .get();
         yAxis.setAxisMinimum(min - 20f);
         yAxis.setTextColor(Color.WHITE);
+//        yAxis.setAxisMaximum(100f);
+//        yAxis.setSpaceTop(0f);
 
         Legend l = chart.getLegend();
         l.setEnabled(false);
