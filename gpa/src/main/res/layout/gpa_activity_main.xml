@@ -14,11 +14,10 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
+        android:clipToPadding="true"
         >
 
         <android.support.design.widget.AppBarLayout
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -26,8 +25,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                bind:layout_scrollFlags="scroll|enterAlways"
-                bind:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                bind:layout_scrollFlags="scroll|enterAlways"/>
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView

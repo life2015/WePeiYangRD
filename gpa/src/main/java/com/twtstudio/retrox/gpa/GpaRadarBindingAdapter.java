@@ -69,7 +69,8 @@ public class GpaRadarBindingAdapter {
 
         chart.setBackgroundColor(Color.rgb(60, 65, 82));
 
-        chart.getDescription().setEnabled(true);
+
+        chart.getDescription().setEnabled(false);
 
         chart.setWebLineWidth(1f);
         chart.setWebColor(Color.LTGRAY);
@@ -79,9 +80,6 @@ public class GpaRadarBindingAdapter {
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setTextSize(9f);
-        xAxis.setYOffset(0f);
-        xAxis.setXOffset(0f);
-        xAxis.setAxisMinimum(60f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {

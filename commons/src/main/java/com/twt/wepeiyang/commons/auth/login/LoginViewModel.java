@@ -1,4 +1,4 @@
-package com.twtstudio.retrox.wepeiyangrd.auth.login;
+package com.twt.wepeiyang.commons.auth.login;
 
 import android.content.Intent;
 import android.databinding.ObservableBoolean;
@@ -7,11 +7,11 @@ import android.widget.Toast;
 
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
-import com.twtstudio.retrox.wepeiyangrd.api.ApiClient;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.twt.wepeiyang.commons.auth.AuthApi;
 import com.twt.wepeiyang.commons.network.ApiErrorHandler;
 import com.twt.wepeiyang.commons.network.ApiResponse;
-import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
-import com.twtstudio.retrox.wepeiyangrd.home.HomeActivity;
+import com.twt.wepeiyang.commons.network.RetrofitProvider;
 import com.twt.wepeiyang.commons.utils.CommonPrefUtil;
 
 import rx.Notification;
@@ -26,14 +26,14 @@ import rx.schedulers.Schedulers;
 public class LoginViewModel implements ViewModel {
 
     //context
-    private BaseActivity mActivity;
+    private RxAppCompatActivity mActivity;
 
     //model
     public final ObservableField<String> twtuName = new ObservableField<>();
     public final ObservableField<String> twtpasswd = new ObservableField<>();
     public Token mToken;
 
-    public LoginViewModel(BaseActivity activity) {
+    public LoginViewModel(RxAppCompatActivity activity) {
         mActivity = activity;
     }
 
@@ -62,7 +62,8 @@ public class LoginViewModel implements ViewModel {
     private void login() {
         mViewStyle.isProgressRefreshing.set(true);
 
-        Observable<Notification<Token>> wpyToken = ApiClient.getService()
+        Observable<Notification<Token>> wpyToken = RetrofitProvider.getRetrofit()
+                .create(AuthApi.class)
                 .login(twtuName.get(), twtpasswd.get())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -79,7 +80,13 @@ public class LoginViewModel implements ViewModel {
                     CommonPrefUtil.setIsLogin(true);
                     Toast.makeText(mActivity, "登陆成功", Toast.LENGTH_SHORT).show();
                     // TODO: 2016/11/27 jump to home page
-                    Intent intent = new Intent(mActivity, HomeActivity.class);
+                    Class clazz = null;
+                    try {
+                        clazz = Class.forName("com.twtstudio.retrox.wepeiyangrd.home.HomeActivity");
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(mActivity, clazz);
                     mActivity.startActivity(intent);
                 });
 

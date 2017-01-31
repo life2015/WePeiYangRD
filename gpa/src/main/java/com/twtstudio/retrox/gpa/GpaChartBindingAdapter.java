@@ -9,6 +9,7 @@ import com.annimon.stream.Stream;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.MarkerImage;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -31,20 +32,27 @@ public class GpaChartBindingAdapter {
     @BindingAdapter(value={"gpaData","valueCommand"},requireAll = false)
     public static void setGpaChartData(LineChart chart, final GpaBean gpaData, final ReplyCommand<Integer> valueCommand){
 
-        Description description = new Description();
-        description.setText("GPA图示");
-        chart.setDescription(description);
+//        Description description = new Description();
+//        description.setText("GPA图示");
+//        chart.setDescription(description);
+        chart.getDescription().setEnabled(false);
         chart.setNoDataText("还没有成绩哟");
 
         if (gpaData == null){
             return;
         }
 
+        if (valueCommand != null){
+            chart.setTouchEnabled(true);
+        }else {
+            chart.setTouchEnabled(false);
+        }
+
         List<String> xVals = Stream.of(gpaData.data)
                 .map(term -> term.name)
                 .collect(Collectors.toList());
 
-        chart.setTouchEnabled(false);
+//        chart.setTouchEnabled(false);
         chart.setDrawGridBackground(false);
         chart.setDragEnabled(false);
         chart.setDrawBorders(false);
@@ -118,6 +126,7 @@ public class GpaChartBindingAdapter {
 
             }
         });
+
 
         chart.setData(lineData);
         chart.invalidate();

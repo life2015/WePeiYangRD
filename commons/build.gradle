@@ -15,6 +15,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+    dataBinding {
+        enabled true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -52,6 +55,9 @@ dependencies {
     compile 'com.annimon:stream:1.1.4'
 
     compile 'com.orhanobut:hawk:2.0.1'
+
+    compile project(':mvvmKit')
+
 
     testCompile 'junit:junit:4.12'
 }

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.twt.wepeiyang.commons.utils.CommonPrefUtil;
-import com.twtstudio.retrox.wepeiyangrd.auth.login.LoginActivity;
+import com.twt.wepeiyang.commons.auth.login.LoginActivity;
 import com.twtstudio.retrox.wepeiyangrd.base.BaseActivity;
 import com.twtstudio.retrox.wepeiyangrd.home.HomeActivity;
 

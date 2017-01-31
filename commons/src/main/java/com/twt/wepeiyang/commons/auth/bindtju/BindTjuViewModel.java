@@ -1,4 +1,4 @@
-package com.twtstudio.retrox.wepeiyangrd.auth.bindtju;
+package com.twt.wepeiyang.commons.auth.bindtju;
 
 import com.kelin.mvvmlight.base.ViewModel;
 

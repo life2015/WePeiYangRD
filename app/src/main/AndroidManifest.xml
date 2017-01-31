@@ -19,10 +19,6 @@
             android:name=".home.HomeActivity"
             android:exported="true">
         </activity>
-        <activity
-            android:name=".auth.login.LoginActivity"
-            android:exported="true"
-            android:theme="@style/LoginTheme"/>
 
         <activity
             android:name=".module.welcome.WelcomeActivity"
