@@ -2,6 +2,14 @@
 
 WePeiYang Redesign and Refactor
 
+### 提示：
+
+> 已迁移到[@天外天工作室](https://github.com/twtstudio)
+>
+> [WePeiYang-Android](https://github.com/twtstudio/WePeiYang-Android/tree/v3.0) 
+>
+> Branch: v3.0
+
 
 
 ## 模块化
